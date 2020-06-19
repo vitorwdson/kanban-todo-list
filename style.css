@@ -24,6 +24,10 @@ body {
     padding: 1em;
 }
 
+.header h1, .section .title {
+    user-select: none;
+}
+
 .svg-button {
     position: relative;
     margin-left: 0.5em;
