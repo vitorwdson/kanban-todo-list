@@ -288,7 +288,6 @@ function closeModal(e) {
     const sections = document.querySelectorAll('.section')
     
     // Hides the unfocus
-    modalUnfocus.classList.remove('uf-modal')
     modalUnfocus.classList.remove('active')
     // Hides the Modal
     modalBox.classList.remove('active')
@@ -298,8 +297,10 @@ function closeModal(e) {
         section.classList.remove('section-select')
     }
 
-    // Wait for transitions and reset all Events
+    // Wait for the transitions to end, resets the z-index of the unfocus and 
+    // reset all Events
     setTimeout(() => {
+        modalUnfocus.classList.remove('uf-modal')
         clearEvents()
         setEvents()        
     }, 700)
