@@ -9,5 +9,5 @@
 - [x] Make cards draggable
 - [x] Add card create/edit function
 - [x] Animate CSS transitions
-- [ ] Add card remove function
+- [x] Add card remove function
 - [ ] Auto-save cards
