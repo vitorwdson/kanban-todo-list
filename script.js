@@ -99,6 +99,11 @@ function openModal(e) {
     const target = e.target.closest('.svg-button')
     const modalType = target.className.split(' ').pop()
 
+    if (modalType === 'delete-button') {
+        removeKanban(target)
+        return
+    }
+
     // Makes the unfocus visible
     modalUnfocus.classList.add('uf-modal')    
     modalUnfocus.classList.add('active')
@@ -173,6 +178,10 @@ function openModal(e) {
             // Instantiate and removes the priority selector
             const prioritySelector = newKanban.querySelector('.select-priority')
             prioritySelector.parentNode.removeChild(prioritySelector)
+
+            // Instantiate and enables the Delete Button
+            const deleteButton = newKanban.querySelector('.delete-button')
+            deleteButton.removeAttribute('disabled')
 
             // Instantiate and enables the Edit Button
             const editButton = newKanban.querySelector('.edit-button')
@@ -285,12 +294,14 @@ function closeModal(e) {
     // Gets the references for the modal parts and all the sections
     const modalUnfocus = document.querySelector('.unfocus')
     const modalBox = document.querySelector('.modal')
+    const deleteModal = document.querySelector('.modal.delete')
     const sections = document.querySelectorAll('.section')
     
     // Hides the unfocus
     modalUnfocus.classList.remove('active')
     // Hides the Modal
     modalBox.classList.remove('active')
+    deleteModal.classList.remove('active')
 
     // Remove the hover on all sections
     for (section of sections) {
@@ -304,6 +315,32 @@ function closeModal(e) {
         clearEvents()
         setEvents()        
     }, 700)
+}
+
+// Cornfirms if the user intends on removing the card and completes the task
+function removeKanban(target) {
+    // Gets the references for the remove modal parts
+    const modalUnfocus = document.querySelector('.unfocus')
+    const deleteModal = document.querySelector('.modal.delete')
+    const cancelButton = deleteModal.querySelector('button.cancel')
+    const confirmButton = deleteModal.querySelector('button.confirm')
+
+    // Gets the reference for the current kanban card
+    const card = target.closest('.kanban')
+
+    // Makes the unfocus visible
+    modalUnfocus.classList.add('uf-modal')
+    modalUnfocus.classList.add('active')
+    // Makes the Modal visible
+    deleteModal.classList.add('active')
+
+    modalUnfocus.addEventListener('click', closeModal)
+    cancelButton.addEventListener('click', closeModal)
+
+    confirmButton.addEventListener('click', (e) => {
+        card.parentNode.removeChild(card)
+        closeModal(undefined)
+    })
 }
 
 // Sets all EventListeners when page loads

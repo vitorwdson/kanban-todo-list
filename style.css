@@ -35,6 +35,9 @@ body {
     border-radius: 50%;
     border: none;
     box-shadow: inset 0 0 5px 1px rgba(255,255,255,0.2);
+    flex-shrink: 0;
+    width: 2em;
+    height: 2em;
 }
 
 .svg-button, .svg-button path {
@@ -72,9 +75,9 @@ body {
     height: 1.5em;
 }
 
-.edit-button {
-    width: 2em;
-    height: 2em;
+.delete-button svg {
+    width: 1.3em;
+    height: 1.3em;
 }
 
 .container {
@@ -90,7 +93,7 @@ body {
     margin: 0.5em;
     flex: 25%;
     max-width: 25%;
-    background: linear-gradient(0deg, rgba(31,64,104,1) 0px, rgba(31,64,104,1) calc(100% - 3.5em), rgba(15,31,51,1) calc(100% - 3.5em), rgba(15,31,51,1) 100%);
+    background: linear-gradient(0deg, #1f4068 0px, #1f4068 calc(100% - 3.5em), #0f1f33 calc(100% - 3.5em), #0f1f33 100%);
     border-radius: 15px;
     min-height: 30em;
     padding: 1.5em 0 0.5em;
@@ -142,7 +145,7 @@ body {
     position: absolute;
     width: calc(100% + 2em - 2px);
     height: 1px;
-    background: black; 
+    background: #0f1f33; 
     top: 100%;
     left: 0;
     margin: 0 calc(-1em + 1px);
@@ -393,11 +396,11 @@ button.priority {
     font-weight: 600;
 }
 
-.modal-footer button.cancel {
+.modal-footer button.cancel, .modal.delete .modal-footer button.confirm {
     background: #d14f38;
 }
 
-.modal-footer button.confirm {
+.modal-footer button.confirm, .modal.delete .modal-footer button.cancel {
     background: #62b641;
 }
 
@@ -407,4 +410,13 @@ button.priority {
 
 .unfocus.uf-modal {
     z-index: 11;
+}
+
+.modal.delete {
+    padding-left: 1em;
+    width: auto;
+    height: auto;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
 }
