@@ -234,6 +234,8 @@ function openModal(e) {
 
                     // Close the Modal
                     closeModal(undefined)
+                    // Saves the cards into the LocalStorage
+                    saveCards()
                 })
             }
 
@@ -285,6 +287,8 @@ function openModal(e) {
 
             // Close the Modal
             closeModal(undefined)
+            // Saves the cards into the LocalStorage
+            saveCards()
         })
     }
 }
@@ -334,14 +338,47 @@ function removeKanban(target) {
     // Makes the Modal visible
     deleteModal.classList.add('active')
 
+    // Add the EventListeners for closing the modal
     modalUnfocus.addEventListener('click', closeModal)
     cancelButton.addEventListener('click', closeModal)
 
+    // Handles the click event on the confirm button
     confirmButton.addEventListener('click', (e) => {
+        // Removes the current card
         card.parentNode.removeChild(card)
+        // Closes the modal
         closeModal(undefined)
+        // Saves the cards into the LocalStorage
+        saveCards()
     })
 }
 
-// Sets all EventListeners when page loads
+// Save all cards into the LocalStorage
+function saveCards() {
+    const dropzones = document.querySelectorAll('.dropzone')
+    const cards = []
+
+    for (dropzone of dropzones) {
+        cards.push(dropzone.innerHTML)
+    }
+
+    localStorage.setItem('kanbanTodoListCards', JSON.stringify(cards))
+}
+
+// Load all cards from the LocalStorage
+function loadCards() {
+    const dropzones = document.querySelectorAll('.dropzone')
+    let cards = localStorage.getItem('kanbanTodoListCards')
+
+    if (cards) {
+        cards = JSON.parse(cards)
+        dropzones.forEach((dz, i) => {
+            dz.innerHTML = cards[i]
+        }) 
+    }   
+}
+
+// Loads cardsfrom the LocalStorage when the page finishes loading
+loadCards()
+// Sets all EventListeners when the page finishes loading
 setEvents()

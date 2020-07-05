@@ -10,4 +10,4 @@
 - [x] Add card create/edit function
 - [x] Animate CSS transitions
 - [x] Add card remove function
-- [ ] Auto-save cards
+- [x] Auto-save cards
