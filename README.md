@@ -2,7 +2,7 @@
 
 ###### This app is a simple TODO list using draggable Kanban Cards
 
-###### Live Preview: https://vitorwdson.github.io/Kanban-TODO-List/
+###### Live Preview: https://vitorwdson.github.io/kanban-todo-list/
 
 ## Task List
 - [x] Stilize page
